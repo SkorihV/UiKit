@@ -1,5 +1,7 @@
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import {useRouter} from "vue-router";
+const router = useRouter();
 
 const props = defineProps({
   openSidebar: {
@@ -9,15 +11,14 @@ const props = defineProps({
 })
 
 const links = ref([
-  {name: 'Типография', href:'/typography'},
-  {name: 'Кнопка', href:'/button'},
+  ...router?.options?.routes
 ])
 
 </script>
 
 <template>
   <div :class="['sidebar', {'sidebar_isopen' : openSidebar}]">
-      <router-link class="sidebar__link" v-for="link in links" :key="link.name" :to="link.href">{{link.name}}</router-link>
+      <router-link class="sidebar__link" v-for="link in links" :key="link.name" :to="link.path">{{link.name}}</router-link>
   </div>
 </template>
 
@@ -40,13 +41,12 @@ const links = ref([
   &__link {
     display: block;
     border-radius: 12px;
-    padding: 10px;
     border: 2px solid #fff;
     transition: .2s;
     font-weight: bold;
     margin-bottom: 10px;
     &:hover {
-      border-color: var(--primary-color-hover);
+      color: var(--primary);
     }
   }
 }
