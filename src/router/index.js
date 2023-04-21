@@ -24,7 +24,7 @@ const router = createRouter({
     },
     {
       path: '/checkbox',
-      name: 'Checkbox',
+      name: 'checkbox',
       component: Checkbox
     }
   ]
